@@ -1,0 +1,26 @@
+name: Feature request
+description: Suggest an improvement with a clear classroom use case.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Teaching need
+      description: What classroom problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: checkboxes
+    id: considerations
+    attributes:
+      label: Considerations
+      options:
+        - label: I considered accessibility.
+        - label: I considered student privacy.
+        - label: I considered offline use.

@@ -1,0 +1,9 @@
+{
+  "format": "ball-game-classroom/questions-v1",
+  "questions": [
+    {"question":"What process do plants use to make food using sunlight?","answer":"Photosynthesis","subject":"Science","difficulty":"easy"},
+    {"question":"What is 3/4 written as a decimal?","answer":"0.75","subject":"Mathematics","difficulty":"easy"},
+    {"question":"Apakah maksud kata adjektif?","answer":"Kata yang menerangkan sifat atau keadaan sesuatu kata nama.","subject":"Bahasa Melayu","difficulty":"medium"},
+    {"question":"‘அறம்’ என்பதன் பொருள் என்ன?","answer":"நல்லொழுக்கம் / நல்வழி","subject":"தமிழ்","difficulty":"medium"}
+  ]
+}

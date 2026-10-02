@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Ball Game Classroom — a multilingual, offline-first classroom quiz game for teachers." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Ball Game Classroom</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="app-header">
+    <div class="brand-wrap">
+      <div class="brand-icon" aria-hidden="true">⚽</div>
+      <div>
+        <h1>Ball Game Classroom</h1>
+        <p id="tagline">A fast, inclusive classroom quiz game.</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <label class="compact-field" for="language-select">
+        <span id="language-label">Language</span>
+        <select id="language-select" aria-label="Interface language">
+          <option value="en">English</option>
+          <option value="ms">Bahasa Melayu</option>
+          <option value="ta">தமிழ்</option>
+        </select>
+      </label>
+      <span id="network-badge" class="badge" role="status">Online</span>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section id="setup-screen" class="screen" aria-labelledby="setup-title">
+      <div class="hero-card">
+        <div>
+          <span class="eyebrow">OPEN-SOURCE • OFFLINE-FIRST • MULTILINGUAL</span>
+          <h2 id="setup-title">Create a classroom game in minutes</h2>
+          <p id="setup-description">Add questions, choose teams, and run a fair turn-based quiz from any browser.</p>
+        </div>
+        <div class="hero-stats" aria-label="Project features">
+          <div><strong>3</strong><span>UI languages</span></div>
+          <div><strong>0</strong><span>accounts needed</span></div>
+          <div><strong>100%</strong><span>local data</span></div>
+        </div>
+      </div>
+
+      <div class="two-column-layout">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <span class="step-pill">1</span>
+              <h3 id="game-settings-title">Game settings</h3>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span id="class-name-label">Class / session name</span>
+              <input id="class-name" maxlength="60" value="Year 6 Classroom" />
+            </label>
+            <label>
+              <span id="team-count-label">Number of teams</span>
+              <select id="team-count">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </label>
+            <label>
+              <span id="timer-label">Seconds per question</span>
+              <select id="timer-seconds">
+                <option value="0">No timer</option>
+                <option value="15">15</option>
+                <option value="30" selected>30</option>
+                <option value="45">45</option>
+                <option value="60">60</option>
+              </select>
+            </label>
+            <label>
+              <span id="points-label">Points for correct answer</span>
+              <select id="base-points">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="team-name-fields" class="team-name-fields" aria-live="polite"></div>
+
+          <div class="toggle-row">
+            <label class="switch-label">
+              <input id="shuffle-questions" type="checkbox" checked />
+              <span id="shuffle-label">Shuffle questions</span>
+            </label>
+            <label class="switch-label">
+              <input id="streak-bonus" type="checkbox" checked />
+              <span id="streak-label">Enable streak bonus</span>
+            </label>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading panel-heading-actions">
+            <div>
+              <span class="step-pill">2</span>
+              <h3 id="question-bank-title">Question bank</h3>
+            </div>
+            <span id="question-count" class="badge badge-soft">0 questions</span>
+          </div>
+
+          <div class="question-editor">
+            <label>
+              <span id="question-label">Question</span>
+              <textarea id="question-input" rows="3" maxlength="240" placeholder="Type a classroom question..."></textarea>
+            </label>
+            <label>
+              <span id="answer-label">Answer / teacher note</span>
+              <textarea id="answer-input" rows="2" maxlength="240" placeholder="Type the expected answer..."></textarea>
+            </label>
+            <div class="editor-meta-grid">
+              <label>
+                <span id="subject-label">Subject</span>
+                <input id="subject-input" maxlength="40" placeholder="e.g. Science" />
+              </label>
+              <label>
+                <span id="difficulty-label">Difficulty</span>
+                <select id="difficulty-input">
+                  <option value="easy">Easy</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </label>
+            </div>
+            <div class="button-row wrap">
+              <button id="add-question" class="btn btn-primary" type="button">Add question</button>
+              <button id="load-demo" class="btn btn-secondary" type="button">Load demo questions</button>
+              <button id="import-json" class="btn btn-ghost" type="button">Import JSON</button>
+              <button id="export-json" class="btn btn-ghost" type="button">Export JSON</button>
+              <input id="file-input" type="file" accept="application/json,.json" hidden />
+            </div>
+          </div>
+
+          <div id="question-list" class="question-list" aria-live="polite"></div>
+        </article>
+      </div>
+
+      <div class="launch-bar">
+        <div>
+          <strong id="privacy-title">Privacy by design</strong>
+          <span id="privacy-copy">Game data stays in this browser unless you export it.</span>
+        </div>
+        <button id="start-game" class="btn btn-accent btn-large" type="button">Start game</button>
+      </div>
+    </section>
+
+    <section id="game-screen" class="screen hidden" aria-labelledby="game-title">
+      <div class="game-topbar">
+        <div>
+          <span id="game-session-label" class="eyebrow">LIVE SESSION</span>
+          <h2 id="game-title">Classroom Game</h2>
+        </div>
+        <div class="game-actions">
+          <button id="save-session" class="btn btn-ghost" type="button">Save progress</button>
+          <button id="end-game" class="btn btn-danger" type="button">End game</button>
+        </div>
+      </div>
+
+      <div id="scoreboard" class="scoreboard" aria-label="Team scores"></div>
+
+      <div class="game-layout">
+        <article class="play-panel">
+          <div class="round-meta">
+            <span id="round-counter">Question 1 / 10</span>
+            <span id="difficulty-badge" class="badge badge-soft">Medium</span>
+          </div>
+
+          <div class="ball-stage" aria-live="polite">
+            <div class="field-lines" aria-hidden="true"></div>
+            <button id="ball-button" class="ball-button" type="button" aria-label="Pass the ball and choose the next team">
+              <span class="ball">⚽</span>
+              <span id="ball-action-text">Pass the ball</span>
+            </button>
+            <p id="selected-team" class="selected-team">Press the ball to choose a team.</p>
+          </div>
+
+          <div class="timer-wrap">
+            <div class="timer-heading">
+              <span id="timer-caption">Time</span>
+              <strong id="timer-value">30</strong>
+            </div>
+            <div class="timer-track" aria-hidden="true"><div id="timer-bar" class="timer-bar"></div></div>
+          </div>
+
+          <div class="question-card">
+            <span id="question-subject" class="eyebrow">Subject</span>
+            <h3 id="active-question">Choose a team to reveal the question.</h3>
+            <div id="answer-box" class="answer-box hidden">
+              <span id="expected-answer-label">Expected answer</span>
+              <p id="active-answer"></p>
+            </div>
+          </div>
+
+          <div class="judge-controls">
+            <button id="reveal-answer" class="btn btn-secondary" type="button" disabled>Reveal answer</button>
+            <button id="mark-correct" class="btn btn-success" type="button" disabled>✓ Correct</button>
+            <button id="mark-incorrect" class="btn btn-danger" type="button" disabled>✕ Incorrect</button>
+          </div>
+
+          <p id="keyboard-help" class="keyboard-help">Keyboard: Space = pass ball • R = reveal • C = correct • X = incorrect</p>
+        </article>
+
+        <aside class="activity-panel">
+          <div class="panel-heading">
+            <h3 id="activity-title">Activity</h3>
+            <span id="streak-display" class="badge badge-soft">No streak</span>
+          </div>
+          <ol id="activity-log" class="activity-log"></ol>
+        </aside>
+      </div>
+    </section>
+
+    <section id="results-screen" class="screen hidden" aria-labelledby="results-title">
+      <div class="results-card">
+        <span class="eyebrow">SESSION COMPLETE</span>
+        <h2 id="results-title">Game results</h2>
+        <p id="results-summary"></p>
+        <div id="podium" class="podium"></div>
+        <div id="results-table-wrap" class="results-table-wrap"></div>
+        <div class="button-row center wrap">
+          <button id="download-csv" class="btn btn-secondary" type="button">Download session CSV</button>
+          <button id="play-again" class="btn btn-primary" type="button">Play again</button>
+          <button id="new-game" class="btn btn-ghost" type="button">New setup</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    <p>Ball Game Classroom • Open source • Built for teaching and learning</p>
+  </footer>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
